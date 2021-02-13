@@ -4450,6 +4450,15 @@ def notify_snatch(sent_to, comicname, comyear, IssueNumber, nzbprov, pack):
             module="[SEARCH]",
         )
 
+    if mylar.CONFIG.SIGNAL_ENABLED and mylar.CONFIG.SIGNAL_ONGRAB:
+        logger.info("Sending Signal notification")
+        signal = notifiers.SIGNAL_SMS()
+        signal.notify(
+            snline + " - " + snatched_name,
+            "Mylar notification - Snatch",
+            module="[SEARCH]",
+        )
+
     return
 
 
